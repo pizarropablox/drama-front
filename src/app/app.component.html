@@ -4,18 +4,15 @@
     <a class="navbar-brand" href="#">
       <img src="assets/logo.png" alt="Logo Drama Store" width="100">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <!-- Botón para ir a la página de login -->
-          <a class="nav-link" routerLink="/login">Ir a Login</a>
+          <a class="nav-link" href="login" (click)="navigateTo('login')">Ir a Login</a>
         </li>
         <li class="nav-item">
           <!-- Botón para ir a la página de registro -->
-          <a class="nav-link" routerLink="/register">Ir a Registro</a>
+          <a class="nav-link" href="register" (click)="navigateTo('register')">Ir a Registro</a>
         </li>
       </ul>
     </div>
@@ -32,8 +29,7 @@
 <!-- Productos -->
 <section class="container py-5">
   <div class="row">
-    <!-- Producto 1 -->
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-md-4">
       <div class="card">
         <img src="assets/image/Vinilo-1.png" class="card-img-top" alt="Producto 1">
         <div class="card-body">
@@ -45,8 +41,7 @@
       </div>
     </div>
 
-    <!-- Producto 2 -->
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-md-4">
       <div class="card">
         <img src="assets/producto2.jpg" class="card-img-top" alt="Producto 2">
         <div class="card-body">
@@ -58,8 +53,7 @@
       </div>
     </div>
 
-    <!-- Producto 3 -->
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-md-4">
       <div class="card">
         <img src="assets/producto3.jpg" class="card-img-top" alt="Producto 3">
         <div class="card-body">

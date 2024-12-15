@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service';  // Asegúrate de tener la ruta correcta
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  errorMessage: string = '';  // Almacenaremos el mensaje de error aquí
+  errorMessage: string = '';  // Almacenamos el mensaje de error aquí
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -32,9 +32,9 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe(
       (response) => {
         if (response.role === 'ADMIN') {
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/admin']);  // Si el usuario es administrador
         } else {
-          this.router.navigate(['/user']);
+          this.router.navigate(['/user']);  // Si el usuario no es administrador
         }
       },
       (error) => {

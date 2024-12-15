@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service';  // Asegúrate de que la ruta sea correcta
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +11,11 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
-  errorMessage: string = '';  // Almacenamos el error aquí
+  errorMessage: string = '';  // Almacenamos el mensaje de error aquí
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Controlar el cambio en los inputs
+  // Control del cambio de inputs
   onInputChange(event: Event, field: string): void {
     const target = event.target as HTMLInputElement;
     if (field === 'username') {
@@ -27,20 +27,22 @@ export class RegisterComponent {
     }
   }
 
-  // Enviar datos para registrar un usuario
+  // Enviar datos de registro
   onRegister(): void {
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'Las contraseñas no coinciden';
       return;
     }
 
-    const newUser = { username: this.username, password: this.password };
-    this.authService.register(newUser).subscribe(
+    const user = { username: this.username, password: this.password };
+
+    // Realizamos la llamada al servicio
+    this.authService.register(user).subscribe(
       (response) => {
-        this.router.navigate(['/login']); // Redirige a login tras registro
+        this.router.navigate(['/login']);  // Redirigir al login después del registro exitoso
       },
       (error) => {
-        this.errorMessage = 'Error al registrar usuario. Verifique los datos.'; // Asignamos el error
+        this.errorMessage = 'Error al registrar el usuario. Inténtalo de nuevo.'; // Asignamos el error
       }
     );
   }
