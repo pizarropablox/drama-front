@@ -1,18 +1,12 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Routes, RouterModule } from '@angular/router'; // Importamos RouterModule y Routes
-import { routes } from './app.routes'; // Importamos las rutas definidas
+import { Router } from '@angular/router'; // Importar Router
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  imports: [RouterModule] // Importamos RouterModule directamente
+  templateUrl: './app.component.html',  // Ruta al HTML del componente
+  styleUrls: ['./app.component.css']    // Ruta al CSS del componente
 })
 export class AppComponent {
-  title = 'drama-front';
-
-  constructor(private router: Router) {
-    this.router.resetConfig(routes);  // Aseguramos que las rutas se configuren manualmente
-  }
+  title = 'drama-front'; // Título de la aplicación
 }

@@ -1,0 +1,18 @@
+/* src/app/login.component.css */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+  
