@@ -1,13 +1,13 @@
-// src/app/auth.service.ts
+'http://localhost:8080/api/users';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root' // Asegura que el servicio esté disponible en toda la aplicación
+  providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/users/login';  // URL de la API del backend
+  private baseUrl = 'http://localhost:8080/api/users';  // URL del microservicio 'drama-user'
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +17,10 @@ export class AuthService {
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, user);
+  }
+
+  isLoggedIn(): boolean {
+    // Lógica para verificar si el usuario está logueado, basada en JWT o sesión
+    return !!localStorage.getItem('token');
   }
 }

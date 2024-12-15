@@ -8,7 +8,9 @@
         id="username" 
         [value]="username" 
         (input)="onInputChange($event, 'username')" 
-        placeholder="Introduce tu nombre de usuario">
+        placeholder="Introduce tu nombre de usuario" 
+        required
+      />
     </div>
     <div>
       <label for="password">Contraseña:</label>
@@ -17,9 +19,15 @@
         id="password" 
         [value]="password" 
         (input)="onInputChange($event, 'password')" 
-        placeholder="Introduce tu contraseña">
+        placeholder="Introduce tu contraseña" 
+        required
+      />
     </div>
     <button type="submit">Iniciar sesión</button>
-    <div *ngIf="errorMessage">{{ errorMessage }}</div>
   </form>
+
+  <!-- Mostrar el mensaje de error de forma condicional -->
+  <div class="error" style="color: red;" [style.display]="errorMessage ? 'block' : 'none'">
+    {{ errorMessage }}
+  </div>
 </div>

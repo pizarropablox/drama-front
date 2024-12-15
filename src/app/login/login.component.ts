@@ -1,45 +1,44 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { NgIf } from '@angular/common';  // Importar NgIf directamente
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  standalone: true,
-  imports: [NgIf]  // Añadir NgIf aquí directamente
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  errorMessage: string = '';
+  errorMessage: string = '';  // Almacenaremos el mensaje de error aquí
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
+  // Control del cambio de inputs
   onInputChange(event: Event, field: string): void {
-    const input = event.target as HTMLInputElement;
-    if (input) {
-      if (field === 'username') {
-        this.username = input.value;
-      } else if (field === 'password') {
-        this.password = input.value;
-      }
+    const target = event.target as HTMLInputElement;
+    if (field === 'username') {
+      this.username = target.value;
+    } else if (field === 'password') {
+      this.password = target.value;
     }
   }
 
+  // Enviar datos de login
   onLogin(): void {
     const credentials = { username: this.username, password: this.password };
 
+    // Realizamos la llamada al servicio
     this.authService.login(credentials).subscribe(
       (response) => {
         if (response.role === 'ADMIN') {
-          window.location.href = '/admin';
+          this.router.navigate(['/admin']);
         } else {
-          window.location.href = '/user';
+          this.router.navigate(['/user']);
         }
       },
       (error) => {
-        this.errorMessage = 'Error al iniciar sesión. Verifique sus credenciales.';
+        this.errorMessage = 'Error al iniciar sesión. Verifique sus credenciales.'; // Asignamos el error
       }
     );
   }

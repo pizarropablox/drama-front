@@ -1,12 +1,24 @@
-// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importar Router
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',  // Ruta al HTML del componente
-  styleUrls: ['./app.component.css']    // Ruta al CSS del componente
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'drama-front'; // Título de la aplicación
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 }
