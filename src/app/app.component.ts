@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,  // Definimos este componente como independiente
+  imports: [RouterModule],  // Importamos RouterModule para usar el enrutamiento
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   constructor(private router: Router) {}
 
-  // Método para redirigir a las rutas de login o registro
-  navigateTo(page: string): void {
-    if (page === 'login') {
-      this.router.navigate(['/login']);
-    } else if (page === 'register') {
-      this.router.navigate(['/register']);
-    }
+  // Método para navegar de manera programática
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
   }
 }

@@ -1,33 +1,20 @@
-<div class="login-container">
+<!-- Formulario de inicio de sesión -->
+<div [style.display]="showLoginForm ? 'block' : 'none'">
   <h2>Iniciar sesión</h2>
-  <form (submit)="onLogin()">
-    <div>
-      <label for="username">Usuario:</label>
-      <input 
-        type="text" 
-        id="username" 
-        [value]="username" 
-        (input)="onInputChange($event, 'username')" 
-        placeholder="Introduce tu nombre de usuario" 
-        required
-      />
-    </div>
-    <div>
-      <label for="password">Contraseña:</label>
-      <input 
-        type="password" 
-        id="password" 
-        [value]="password" 
-        (input)="onInputChange($event, 'password')" 
-        placeholder="Introduce tu contraseña" 
-        required
-      />
-    </div>
-    <button type="submit">Iniciar sesión</button>
-  </form>
+  
+  <!-- Nombre de usuario -->
+  <label for="username">Nombre de usuario</label>
+  <input type="text" id="username" (input)="onUsernameChange($event)">
 
-  <!-- Mostrar el mensaje de error de forma condicional -->
-  <div class="error" style="color: red;" [style.display]="errorMessage ? 'block' : 'none'">
-    {{ errorMessage }}
-  </div>
+  <!-- Contraseña -->
+  <label for="password">Contraseña</label>
+  <input type="password" id="password" (input)="onPasswordChange($event)">
+
+  <!-- Botón para iniciar sesión -->
+  <button (click)="onLogin()">Iniciar sesión</button>
 </div>
+
+<!-- Botón para mostrar/ocultar el formulario de login -->
+<button (click)="toggleLoginForm()">
+  {{ showLoginForm ? 'Ocultar Login' : 'Mostrar Login' }}
+</button>

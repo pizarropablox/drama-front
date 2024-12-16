@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';  // Asegúrate de tener la ruta correcta
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,38 +8,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
+  username: string = '';  // Puedes cambiar esta variable por "email" si es más apropiado
   password: string = '';
-  errorMessage: string = '';  // Almacenamos el mensaje de error aquí
+  errorMessage: string = '';
+  showLoginForm: boolean = true; // Controla si el formulario de login es visible
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  // Control del cambio de inputs
-  onInputChange(event: Event, field: string): void {
+  // Controlar los cambios en el input manualmente
+  onUsernameChange(event: Event): void {
     const target = event.target as HTMLInputElement;
-    if (field === 'username') {
-      this.username = target.value;
-    } else if (field === 'password') {
-      this.password = target.value;
-    }
+    this.username = target.value;
   }
 
-  // Enviar datos de login
-  onLogin(): void {
-    const credentials = { username: this.username, password: this.password };
+  onPasswordChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.password = target.value;
+  }
 
-    // Realizamos la llamada al servicio
+  onLogin(): void {
+    const credentials = { email: this.username, password: this.password };
+  
     this.authService.login(credentials).subscribe(
       (response) => {
+        // Asegúrate de que el backend devuelva algo útil, como el rol del usuario.
+        // Verifica la estructura de la respuesta (que debería ser un objeto JSON, no solo un string)
         if (response.role === 'ADMIN') {
-          this.router.navigate(['/admin']);  // Si el usuario es administrador
+          this.router.navigate(['/admin']);
+        } else if (response.role === 'USER') {
+          this.router.navigate(['/user']);
         } else {
-          this.router.navigate(['/user']);  // Si el usuario no es administrador
+          // Si el backend no devuelve un campo "role", maneja el caso apropiadamente
+          this.errorMessage = 'No se pudo determinar el rol del usuario.';
         }
       },
       (error) => {
-        this.errorMessage = 'Error al iniciar sesión. Verifique sus credenciales.'; // Asignamos el error
+        this.errorMessage = 'Error al iniciar sesión. Verifique sus credenciales.';
       }
     );
+  }
+  
+
+  // Alterna la visibilidad del formulario de login
+  toggleLoginForm(): void {
+    this.showLoginForm = !this.showLoginForm;
   }
 }

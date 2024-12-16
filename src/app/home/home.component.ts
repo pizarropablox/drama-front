@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  template: `<h2>Bienvenido a Drama Store</h2><p>Los mejores productos a tu alcance</p>`
 })
 export class HomeComponent {
   products = [
@@ -15,4 +12,8 @@ export class HomeComponent {
     { name: 'Producto 3', price: 300, description: 'Descripción del producto 3' }
   ];
 }
+
+
+
+
 
