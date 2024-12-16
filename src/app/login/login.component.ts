@@ -31,22 +31,21 @@ export class LoginComponent {
   
     this.authService.login(credentials).subscribe(
       (response) => {
-        // Asegúrate de que el backend devuelva algo útil, como el rol del usuario.
-        // Verifica la estructura de la respuesta (que debería ser un objeto JSON, no solo un string)
-        if (response.role === 'ADMIN') {
-          this.router.navigate(['/admin']);
-        } else if (response.role === 'USER') {
-          this.router.navigate(['/user']);
+        // Si el backend devuelve una respuesta exitosa
+        if (response === "Login exitoso") {
+          this.router.navigate(['/home']);  // Redirige al home si el login es exitoso
         } else {
-          // Si el backend no devuelve un campo "role", maneja el caso apropiadamente
-          this.errorMessage = 'No se pudo determinar el rol del usuario.';
+          this.errorMessage = 'Credenciales inválidas';  // Si las credenciales son incorrectas
         }
       },
       (error) => {
         this.errorMessage = 'Error al iniciar sesión. Verifique sus credenciales.';
       }
     );
-  }
+}
+
+  
+  
   
 
   // Alterna la visibilidad del formulario de login
